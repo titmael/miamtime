@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  survey: 
+  title: MyString
+  locality: MyString
+
+two:
+  survey: 
+  title: MyString
+  locality: MyString

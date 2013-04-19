@@ -1,0 +1,22 @@
+<%= form_for @survey do |s| %>
+	<% @survey.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+   <% end %>
+	<div class="field">
+		<%= s.label :title %><%= s.text_field :title %> 
+	</div>
+	<div class="field">
+		<%= s.label :locality %><%= s.text_field :locality %> 
+	</div>
+	<hr>
+	<h2>options</h2>
+	<%= s.fields_for :options do |o| %>
+		<div class="option">
+			<%= o.label :locality %><%= o.text_field :locality %>
+			<%= link_to_function "supprimer", "remove_new_option(this)" %>
+		</div>
+	<% end %>
+	<div class="action">
+		<%= s.submit "creer" %>
+	</div>
+<% end %>

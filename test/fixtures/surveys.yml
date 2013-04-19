@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  hash_url: MyString
+  title: MyString
+  password: MyString
+  locality: MyString
+  when_date: 2013-04-17
+  when_text: MyString
+  end_votes: 2013-04-17 17:52:32
+  creation: 2013-04-17
+
+two:
+  user: 
+  hash_url: MyString
+  title: MyString
+  password: MyString
+  locality: MyString
+  when_date: 2013-04-17
+  when_text: MyString
+  end_votes: 2013-04-17 17:52:32
+  creation: 2013-04-17

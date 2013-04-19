@@ -1,0 +1,7 @@
+title : <%= @survey.title %>
+locality : <%= @survey.locality %>
+<ul>
+<% @survey.options.each do |option| %>
+	<li><%= option.locality %></li>
+<% end %>
+</ul>
