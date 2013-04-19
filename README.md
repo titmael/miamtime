@@ -23,6 +23,9 @@ Sur la page du sondage différentes statistiques sur le sondage (fun)
 
 Les plus
 ------
+
+API foursquare pour chercher des lieux : description, notes
+
 Options prédéfinies comme "je ne mange pas là", "j'ai déjà ma bouffe", "je m'en fou"
 
 Partage sur réseaux sociaux (soyons à la mode)
