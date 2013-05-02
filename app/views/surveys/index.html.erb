@@ -1,0 +1,14 @@
+<% @surveys.each_with_index do |survey, index| %>
+  locality : <%= survey.locality %><br/>
+  hash : <%= link_to survey.hash_url, show_survey_path(:hash_url => survey.hash_url) %><br/>
+  <br/>
+  options
+  <ul>
+  <% survey.options.each do |option| %>
+    <li><%= option.locality %></li>
+  <% end %>
+  </ul>
+  <% if (index + 1) < @surveys.length %>
+    <hr/>
+  <% end %>
+<% end %>
