@@ -1,0 +1,48 @@
+<% content_for :head do %>
+  <script type="text/javascript" src="/assets/javascripts/jquery.nested_form.js"></script>
+<% end %>
+
+<div class="row-fluid">
+  <div class="span3">
+    <h2>Quelques tips</h2>
+    <ul>
+      <li>Indiquez la localité du sondage pour guider les votants dans leur choix</li>
+      <li>Pensez à ceux qui ne mangent pas avec vous ou qui ont déjà de quoi manger</li>
+      <li>Vous pouvez indiquer des lieux qui ne sont pas dans la liste des choix (jardins public, bureau ...)</li>
+    </ul>
+  </div>
+  <%= nested_form_for @survey do |s| %>
+  <div class="span3">
+    <%= s.label "localité du sondage" %><%= s.text_field :locality %>
+    <hr>
+    <h2 style="float:left">options</h2>
+    <div style="float:left; margin: 16px 0px 0px 15px;"><%= s.link_to_add "ajouter", :options, "data-target" => "#options", :class => "btn btn-primary" %></div>
+    <div id="options" style="clear:both">
+      <%= s.fields_for :options do |o| %>
+        <div class="option">
+          <%= o.label "localité" %><%= o.text_field :locality %>
+          <%= o.link_to_remove "X", :class => "btn btn-danger", :style => "vertical-align: top;" %>
+        </div>
+      <% end %>
+    </div>
+    <hr/>
+    <%= s.submit "creer le sondage", :class => "btn btn-success" %>
+  </div>
+  <div class="span3">
+    <% if @survey.errors.full_messages.length > 0 || flash[:notice] %>
+    <h2>Whoho !</h2>
+      <div class="alert">
+        <ul>
+          <% if flash[:notice] %>
+            <li><%= flash[:notice] %></li>
+          <% end %>
+        <% @survey.errors.each do |attr, msg| %>
+            <li><%= msg %></li>
+         <% end %>
+       </ul>
+       </div>
+    <% end %>
+  </div>
+<% end %>
+
+</div>
