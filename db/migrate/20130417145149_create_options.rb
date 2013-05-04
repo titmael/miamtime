@@ -4,6 +4,7 @@ class CreateOptions < ActiveRecord::Migration
       t.references :survey
       t.string :title
       t.string :locality
+      t.string :locality_id
 
       t.timestamps
     end

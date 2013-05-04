@@ -17,8 +17,9 @@ ActiveRecord::Schema.define(:version => 20130417155231) do
     t.integer  "survey_id"
     t.string   "title"
     t.string   "locality"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "locality_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "options", ["survey_id"], :name => "index_options_on_survey_id"
@@ -28,13 +29,14 @@ ActiveRecord::Schema.define(:version => 20130417155231) do
     t.string   "hash_url"
     t.string   "password"
     t.string   "locality"
+    t.integer  "locality_id"
     t.date     "when_date"
     t.string   "when_text"
     t.date     "end_votes"
     t.string   "end_text"
     t.date     "creation"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "surveys", ["user_id"], :name => "index_surveys_on_user_id"
@@ -43,20 +45,25 @@ ActiveRecord::Schema.define(:version => 20130417155231) do
     t.string   "name"
     t.string   "password"
     t.string   "hash_validation"
+    t.string   "email"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.string   "email"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["hash_validation"], :name => "index_users_on_hash_validation"
+  add_index "users", ["name"], :name => "index_users_on_name"
 
   create_table "votes", :force => true do |t|
     t.integer  "option_id"
     t.integer  "user_id"
+    t.string   "username"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "username"
   end
 
   add_index "votes", ["option_id"], :name => "index_votes_on_option_id"
   add_index "votes", ["user_id"], :name => "index_votes_on_user_id"
+  add_index "votes", ["username"], :name => "index_votes_on_username"
 
 end

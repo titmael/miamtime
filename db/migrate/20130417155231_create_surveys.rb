@@ -5,6 +5,7 @@ class CreateSurveys < ActiveRecord::Migration
       t.string :hash_url
       t.string :password
       t.string :locality
+      t.integer :locality_id
       t.date :when_date
       t.string :when_text
       t.date :end_votes

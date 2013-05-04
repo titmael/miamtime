@@ -9,6 +9,7 @@ class SurveysController < ApplicationController
   def new
   	@survey = Survey.new
     @survey.options.build
+    render "new_edit"
   end
 
   def create
@@ -24,7 +25,7 @@ class SurveysController < ApplicationController
     begin
       DateTime.parse("#{params[:survey][:end_votes]} #{params[:survey][:end_text]}")
     rescue
-      flash[:notice] = "La date/heure de fin de fin de vote n'est pas correcte"
+      flash[:notice] = "La date/heure de fin de vote n'est pas correcte"
       render :action => "new"
       return
     end
@@ -41,8 +42,9 @@ class SurveysController < ApplicationController
 		end
   end
 
+
   def show
-  	@survey = Survey.where(hash_url: params[:hash_url]).first
+    @survey = Survey.where(hash_url: params[:hash_url]).first
     nbminutes = Rails.application.config.can_vote_after_x_minutes
     diffdate = Time.zone.now - nbminutes.minutes
     @already_voted = cookies["#{params[:hash_url]}"] != nil || !@survey.options.joins(:votes).where("votes.username = ? AND votes.created_at >= ?", session[:session_id], diffdate).empty?;
@@ -51,7 +53,7 @@ class SurveysController < ApplicationController
   def edit
     if session[:logged_for] != nil && session[:logged_for].include?(params[:id])
       @survey = Survey.find(params[:id])
-      render "edit"
+      render "new_edit"
     else
       @id = params[:id]
       render "edit_login"
@@ -66,7 +68,7 @@ class SurveysController < ApplicationController
       end
       session[:logged_for].push(params[:id])
     end
-    redirect_to edit_survey_path(:id => params[:id])
+    redirect_to new_survey_path(:id => params[:id])
   end
 
   def update
@@ -110,5 +112,15 @@ class SurveysController < ApplicationController
 
   def index
     @surveys = Survey.all
+  end
+
+  respond_to :json
+  def search_cities
+    if params[:search] != nil
+      cities = Ville.limit(10).select("id, nom_ville, code_postal").where("lower(nom_ville) like lower(?)", "#{params[:search]}%").order("nom_ville ASC")
+    else
+      cities = Ville.limit(10, :select => 'id, nom_ville, code_postal').order("nom_ville ASC")
+    end
+    respond_with(cities)
   end
 end

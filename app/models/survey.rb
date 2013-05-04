@@ -4,7 +4,7 @@ class Survey < ActiveRecord::Base
   has_many :options, :dependent => :destroy
 
   accepts_nested_attributes_for :options
-  attr_accessible :creation, :end_votes, :end_text, :hash_url, :locality, :when_date, :when_text, :options_attributes, :password, :password_confirmation
+  attr_accessible :creation, :end_votes, :end_text, :hash_url, :locality, :when_date, :when_text, :options_attributes, :password, :password_confirmation, :locality_id
 
   validates_presence_of :password, :message => "le mot de passe ne peut être vide", :on => :create
   validates_presence_of :password_confirmation, :message => "la confirmation du mot de passe ne peut être vide", :on => :create
