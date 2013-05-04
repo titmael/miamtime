@@ -2,9 +2,6 @@ Miamtime
 ========
 Qui mange où qui mange quoi ? Votez !
 
-Utils
--------
-Ouvrir les fichiers .uml : http://argouml.tigris.org
 
 Fonctionnement
 --------
