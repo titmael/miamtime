@@ -14,7 +14,4 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
-function remove_option(optionDom){
-	$(optionDom).prev("input[type=hidden]").value = "1";
-    $(optionDom).closest(".option").hide();
-}
+

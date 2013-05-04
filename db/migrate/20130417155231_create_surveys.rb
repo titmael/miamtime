@@ -3,12 +3,12 @@ class CreateSurveys < ActiveRecord::Migration
     create_table :surveys do |t|
       t.references :user
       t.string :hash_url
-      t.string :title
       t.string :password
       t.string :locality
       t.date :when_date
       t.string :when_text
-      t.datetime :end_votes
+      t.date :end_votes
+      t.string :end_text
       t.date :creation
 
       t.timestamps

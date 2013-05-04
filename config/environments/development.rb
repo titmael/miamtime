@@ -34,4 +34,6 @@ Miamtime::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.can_vote_after_x_minutes = 0
 end

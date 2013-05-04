@@ -12,7 +12,10 @@ class VotesController < ApplicationController
       option = Option.find(params[:option])
       @vote.option = option
 
-      @vote.save
+      if @vote.save
+        nbminutes = Rails.application.config.can_vote_after_x_minutes
+        cookies["#{params[:hash_url]}"] = {:value => "voted", :expires => Time.zone.now + nbminutes.minutes}
+      end
     end
     redirect_to show_survey_path(:hash_url => params[:hash_url])
   end

@@ -26,12 +26,12 @@ ActiveRecord::Schema.define(:version => 20130417155231) do
   create_table "surveys", :force => true do |t|
     t.integer  "user_id"
     t.string   "hash_url"
-    t.string   "title"
     t.string   "password"
     t.string   "locality"
     t.date     "when_date"
     t.string   "when_text"
-    t.datetime "end_votes"
+    t.date     "end_votes"
+    t.string   "end_text"
     t.date     "creation"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

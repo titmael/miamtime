@@ -2,13 +2,29 @@
 <html>
 <head>
   <title>Miamtime</title>
+  <%= stylesheet_link_tag    "start/jquery-ui-1.10.2.custom.min" %>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "jquery-1.9.1.js", "jquery-ui-1.10.2.custom.min.js", "jquery.browser.js", "jquery.meiomask.min.js" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
+<div class="navbar">
+  <div class="navbar-inner">
+    <a href="/" class="brand"><span style="color:#0070A5; font-weight:bold">Miam</span> Time</a>
+    <ul class="nav">
+      <li class="<%= 'active' if current_page?(root_path) %>"><a href="/">Accueil</a></li>
+      <li class="<%= 'active' if current_page?(new_survey_path) %>"><a href="/surveys/new">Créer</a></li>
+      <li class="<%= 'active' if current_page?(surveys_path) %>"><a href="/surveys">Liste</a></li>
+    </ul>
+    <ul class="nav pull-right">
+      <li id="editSurvey" style="display:none;"><a href="#">Editer</a></li>
+    </ul>
+  </div>
+</div>
+<div class="container-fluid">
+  <%= yield %>
+</div>
 
 </body>
 </html>

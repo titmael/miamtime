@@ -1,22 +1,66 @@
-<%= form_for @survey do |s| %>
-	<% @survey.errors.full_messages.each do |msg| %>
-      <p><%= msg %></p>
-   <% end %>
-	<div class="field">
-		<%= s.label :title %><%= s.text_field :title %> 
-	</div>
-	<div class="field">
-		<%= s.label :locality %><%= s.text_field :locality %> 
-	</div>
-	<hr>
-	<h2>options</h2>
-	<%= s.fields_for :options do |o| %>
-		<div class="option">
-			<%= o.label :locality %><%= o.text_field :locality %>
-			<%= link_to_function "supprimer", "remove_new_option(this)" %>
+<%= nested_form_for @survey do |s| %>
+	<div class="span3">
+		<%= s.label "localité du sondage" %><%= s.text_field :locality,  :placeholder => "Bordeaux ..." %>
+		<label>miam time</label>
+		<div class="datepicker">
+			<%= s.text_field :when_date, :readonly => true, :id => "whendate" %>
 		</div>
-	<% end %>
-	<div class="action">
-		<%= s.submit "creer" %>
+		<%= s.text_field :when_text, :style => "width: 87px; float:left", :placeholder => "midi, heure ..." %>
+
+    <label style="clear:both">fin des votes</label>
+    <div class="datepicker">
+    	<%= s.text_field :end_votes, :readonly => true, :id => "endvotes" %>
+    </div>
+    <%= s.text_field :end_text, :style => "float:left; width: 50px", :placeholder => "hh:mm", :id => "time" %>
+
+		<hr style="clear:both">
+		<h2 style="float:left">options</h2>
+		<div style="float:left; margin: 16px 0px 0px 15px;"><%= s.link_to_add "ajouter", :options, "data-target" => "#options", :class => "btn btn-primary" %></div>
+		<div id="options" style="clear:both">
+			<%= s.fields_for :options do |o| %>
+				<div class="option">
+					<%= o.label "localité" %><%= o.text_field :locality %>
+					<%= o.link_to_remove "X", :class => "btn btn-danger", :style => "vertical-align: top;" %>
+				</div>
+			<% end %>
+		</div>
+		<hr/>
+		<%= s.label "mot de passe" %><%= s.password_field :password %>
+		<%= s.label "confirmation" %><%= s.password_field :password_confirmation %>
+		<hr/>
+		<%= s.submit "créer le sondage", :class => "btn btn-success" %>
+	</div>
+	<div class="span3">
+		<% if @survey.errors.full_messages.length > 0 || flash[:notice] %>
+		<h2>Whoho !</h2>
+			<div class="alert">
+				<ul>
+					<% if flash[:notice] %>
+            <li><%= flash[:notice] %></li>
+          <% end %>
+				<% @survey.errors.each do |attr, msg| %>
+			      <li><%= msg %></li>
+			   <% end %>
+			 </ul>
+		   </div>
+		<% end %>
 	</div>
 <% end %>
+<script type="text/javascript">
+  $('#whendate').datepicker({
+    showOn: "button",
+    buttonImageOnly: true,
+    buttonImage: "/images/calendar.png",
+    dateFormat: "yy-mm-dd",
+    onSelect: function(selected){
+      $('#endvotes').val("").datepicker("option", "maxDate", selected);
+    }
+  });
+  $('#endvotes').datepicker({
+    showOn: "button",
+    buttonImageOnly: true,
+    buttonImage: "/images/calendar.png",
+    dateFormat: "yy-mm-dd"
+  });
+  $('#time').setMask("29:59");
+</script>

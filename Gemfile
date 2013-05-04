@@ -23,9 +23,20 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'thin'
+end
+
 gem 'jquery-rails'
 
 gem 'validates_email_format_of'
+gem 'nested_form'
+gem "json"
+gem "typhoeus"
+gem "quimby"
+gem "mysql2"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

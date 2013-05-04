@@ -1,6 +1,8 @@
 <% @surveys.each_with_index do |survey, index| %>
   locality : <%= survey.locality %><br/>
   hash : <%= link_to survey.hash_url, show_survey_path(:hash_url => survey.hash_url) %><br/>
+  miam time : <%= survey.when_date %><br/>
+  fin des votes : <%= survey.end_votes %> à <%= survey.end_text %><br/>
   <br/>
   options
   <ul>
